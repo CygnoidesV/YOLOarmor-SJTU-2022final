@@ -676,7 +676,7 @@ class LoadImagesAndLabels(Dataset):
 
             # HSV color-space
             augment_hsv(img, hgain=hyp['hsv_h'], sgain=hyp['hsv_s'], vgain=hyp['hsv_v'])
-'''
+        '''
         if len(labels):
             points_num = 2
             size = np.min(np.concatenate([w.reshape([-1, 1]), h.reshape([-1, 1])], axis=1), axis=1) / 40
@@ -691,7 +691,7 @@ class LoadImagesAndLabels(Dataset):
                             cv2.circle(img, (int(position[0][j]), int(position[1][j])), max(int(size[i]), 1),
                                        (100, 100, 255), -1)
                         rate -= 0.6
-'''
+        '''
         nl = len(labels)  # number of labels
         if nl:
             # labels[:, 1:9] = xyxy2xywhn(labels[:, 1:9], w=img.shape[1], h=img.shape[0], clip=True, eps=1E-3)
