@@ -28,7 +28,7 @@ from tqdm import tqdm
 
 from utils.augmentations import Albumentations, augment_hsv, copy_paste, letterbox, mixup, random_perspective
 from utils.general import check_dataset, check_requirements, check_yaml, clean_str, segments2boxes, \
-    xywh2xyxy, xywhn2xyxy, xyxy2xywhn, xyn2xy, xyxyxyxyn2xyxyxyxy, redPointsSpawn
+    xywh2xyxy, xywhn2xyxy, xyxy2xywhn, xyn2xy, xyxyxyxyn2xyxyxyxy
 from utils.torch_utils import torch_distributed_zero_first
 
 # Parameters
@@ -655,6 +655,7 @@ class LoadImagesAndLabels(Dataset):
         ymin = np.min(labels[:, [2, 4, 6, 8]], axis=1).astype(np.int32)
         w = np.max(labels[:, [1, 3, 5, 7]], axis=1).astype(np.int32) - xmin
         h = np.max(labels[:, [2, 4, 6, 8]], axis=1).astype(np.int32) - ymin
+        '''
         if len(labels):
             points_num = 1
             size = np.min(np.concatenate([w.reshape([-1, 1]), h.reshape([-1, 1])], axis=1), axis=1) / 40
@@ -666,6 +667,7 @@ class LoadImagesAndLabels(Dataset):
                     for j in range(position.shape[1]):
                         cv2.circle(img, (int(position[0][j]), int(position[1][j])), int(size[i] * 6), (160, 160, 160),
                                    -1)
+        '''
 
         if self.augment:
             # Albumentations
@@ -674,7 +676,7 @@ class LoadImagesAndLabels(Dataset):
 
             # HSV color-space
             augment_hsv(img, hgain=hyp['hsv_h'], sgain=hyp['hsv_s'], vgain=hyp['hsv_v'])
-
+'''
         if len(labels):
             points_num = 2
             size = np.min(np.concatenate([w.reshape([-1, 1]), h.reshape([-1, 1])], axis=1), axis=1) / 40
@@ -689,7 +691,7 @@ class LoadImagesAndLabels(Dataset):
                             cv2.circle(img, (int(position[0][j]), int(position[1][j])), max(int(size[i]), 1),
                                        (100, 100, 255), -1)
                         rate -= 0.6
-
+'''
         nl = len(labels)  # number of labels
         if nl:
             # labels[:, 1:9] = xyxy2xywhn(labels[:, 1:9], w=img.shape[1], h=img.shape[0], clip=True, eps=1E-3)
