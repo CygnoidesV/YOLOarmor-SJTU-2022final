@@ -480,7 +480,7 @@ def parse_opt(known=False):
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='', help='initial weights path')
     parser.add_argument('--cfg', type=str, default='models/yolov5s.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default='~/Data/RM-keypoint-4-9-Oplus/armor.yaml', help='dataset.yaml path')
+    parser.add_argument('--data', type=str, default='/cluster/home/it_stu3/Data/RM-keypoint-4-9/armor.yaml', help='dataset.yaml path')
     parser.add_argument('--hyp', type=str, default='data/hyps/RM.armor.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=500)
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs')
@@ -510,7 +510,7 @@ def parse_opt(known=False):
     parser.add_argument('--freeze', type=int, default=0, help='Number of layers to freeze. backbone=10, all=24')
     parser.add_argument('--save-period', type=int, default=100, help='Save checkpoint every x epochs (disabled if < 1)')
     parser.add_argument('--local_rank', type=int, default=-1, help='DDP parameter, do not modify')
-    parser.add_argument('--negative-path', nargs='+', default=['/cluster/home/it_stu4/Data/COCO/unlabeled2017/'], type=str)
+    parser.add_argument('--negative-path', nargs='+', default=['/cluster/home/it_stu3/Data/COCO/unlabeled2017/'], type=str)
     
     # Weights & Biases arguments
     parser.add_argument('--entity', default=None, help='W&B: Entity')
